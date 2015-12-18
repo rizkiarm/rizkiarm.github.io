@@ -1,2 +1,81 @@
-It works!
-<p style="display:none;">8</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>rizkiarm</title>
+	<meta name="description" content="rizkiarm">
+	<meta name="author" content="rizkiarm">
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="universe">
+		<div class="container">
+			<div class="absolute-center">
+				<h1>rizki<b>arm</b></h1>
+				<p>Let's discuss your next great ideas</p>
+				<ul class="touch">
+					<li><a href="https://id.linkedin.com/in/muhammad-rizki-aulia-rahman-maulana-449b21b9" class="button"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="mailto:rizki@rizkiarm.com" class="button"><i class="fa fa-envelope"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript">
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera( 35, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+		var renderer = new THREE.WebGLRenderer();
+		renderer.setSize( window.innerWidth-3, window.innerHeight-3 );
+		renderer.setClearColorHex( 0x3F3F3F, 1 );
+		document.body.appendChild( renderer.domElement );
+
+		var object = [];
+		object[0] = new THREE.Mesh( 
+			new THREE.OctahedronGeometry( 1, 1 ), 
+			new THREE.MeshBasicMaterial( { color: 0x484848, wireframe: true } ) 
+		);
+		object[1] = new THREE.Mesh( 
+			new THREE.IcosahedronGeometry( 5, 1 ), 
+			new THREE.MeshBasicMaterial( { color: 0x424242, wireframe: true } ) 
+		);
+
+		for(var i in object){
+			scene.add( object[i] );
+		}
+
+		camera.position.z = 5;
+
+		var render = function () {
+			object[0].rotation.x += 0.005;
+			object[0].rotation.y += 0.0005;
+
+			object[1].rotation.x += 0.0005;
+			object[1].rotation.y += 0.00005;
+
+			camera.lookAt( scene.position );
+
+			renderer.render(scene, camera);
+		};
+
+		var animate = function(){
+			requestAnimationFrame(animate);  
+			render();
+		}
+
+		document.addEventListener( 'resize', function(){
+			camera.aspect = window.innerWidth / window.innerHeight;
+		    camera.updateProjectionMatrix();
+
+		    renderer.setSize( window.innerWidth, window.innerHeight );
+		}, false );
+
+		animate();
+	</script>    
+</body>
+</html>
